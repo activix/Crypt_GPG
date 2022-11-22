@@ -1660,6 +1660,15 @@ class Crypt_GPG_Engine
         $this->_debug('OPENING GPG SUBPROCESS WITH THE FOLLOWING COMMAND:');
         $this->_debug($commandLine);
 
+        $this->_debug('START CHECK ENV VARIABLES');
+        foreach ($env as $envIndex => $_env) {
+            if (is_array($_env)) {
+                $this->_debug('ENV  ' . $envIndex . ' is an array ');
+                unset($env[$envIndex]);
+            }
+        }
+        $this->_debug('END CHECK ENV VARIABLES');
+
         $this->_process = proc_open(
             $commandLine,
             $descriptorSpec,
